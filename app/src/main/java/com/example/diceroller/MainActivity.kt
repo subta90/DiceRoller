@@ -13,8 +13,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener{ rollDice() }
+        rollButton.setOnClickListener { rollDice() }
 
+        val countupButton: Button = findViewById(R.id.countup_button)
+        countupButton.setOnClickListener { countup() }
     }
 
     private fun rollDice() {
@@ -26,5 +28,27 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, randomInt.toString(), Toast.LENGTH_SHORT).show()
 
     }
+
+    private fun countup() {
+
+        val resultText: TextView = findViewById(R.id.result_text)
+
+        var currentCount  = 1
+
+        try {
+            currentCount = resultText.text.toString().toInt()
+        } catch (e: NumberFormatException) {
+            resultText.text = 1.toString()
+        }
+
+        if (currentCount >= 6) {
+            return
+        }
+
+        currentCount += 1
+
+        resultText.text = currentCount.toString()
+    }
+
 
 }
